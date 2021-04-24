@@ -32,55 +32,63 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-              <Component id="pnl_gamer1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lbl_rival" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblplayer" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_name" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btn_connect" pref="160" max="32767" attributes="0"/>
-                          <Component id="txt_rival_name" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btn_rolldice" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="label3" min="-2" pref="195" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                              <Component id="pnl_gamer1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btn_dice1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                      <Component id="btn_dice2" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                      <Component id="btn_dice3" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="btn_rolldice" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lbl_rival" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="btn_dice4" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                              <Component id="btn_dice5" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                              <Component id="btn_dice6" min="-2" pref="60" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="btn_dice1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                              <Component id="btn_dice2" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                                              <Component id="btn_dice3" min="-2" pref="60" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="lblplayer" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btn_dice4" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                      <Component id="btn_dice5" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                      <Component id="btn_dice6" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txt_rival_name" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
+                                          <Component id="btn_connect" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
+                                          <Component id="txt_name" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-                              <Component id="label3" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
+                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="lbl_winner" max="32767" attributes="0"/>
+                          <Component id="lbl_winner_title" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -173,118 +181,167 @@
                       <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="label1" max="32767" attributes="0"/>
-                          <Component id="btn_p1_1" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_2" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_3" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_4" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_5" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_6" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_7" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_8" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_9" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_10" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p1_11" pref="75" max="32767" attributes="0"/>
+                          <Component id="btn_p1_1" max="32767" attributes="0"/>
+                          <Component id="btn_p1_2" max="32767" attributes="0"/>
+                          <Component id="btn_p1_3" max="32767" attributes="0"/>
+                          <Component id="btn_p1_4" max="32767" attributes="0"/>
+                          <Component id="btn_p1_5" max="32767" attributes="0"/>
+                          <Component id="btn_p1_6" max="32767" attributes="0"/>
+                          <Component id="btn_p1_7" max="32767" attributes="0"/>
+                          <Component id="btn_p1_8" max="32767" attributes="0"/>
+                          <Component id="btn_p1_9" max="32767" attributes="0"/>
+                          <Component id="btn_p1_10" max="32767" attributes="0"/>
+                          <Component id="btn_p1_11" min="-2" pref="75" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btn_p2_1" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_2" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_3" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_4" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_5" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_6" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_7" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_8" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_9" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_10" pref="75" max="32767" attributes="0"/>
-                          <Component id="btn_p2_11" pref="75" max="32767" attributes="0"/>
-                          <Component id="label2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btn_p2_1" max="32767" attributes="0"/>
+                          <Component id="btn_p2_2" max="32767" attributes="0"/>
+                          <Component id="btn_p2_3" max="32767" attributes="0"/>
+                          <Component id="btn_p2_4" max="32767" attributes="0"/>
+                          <Component id="btn_p2_5" max="32767" attributes="0"/>
+                          <Component id="btn_p2_6" max="32767" attributes="0"/>
+                          <Component id="btn_p2_7" max="32767" attributes="0"/>
+                          <Component id="btn_p2_8" max="32767" attributes="0"/>
+                          <Component id="btn_p2_9" max="32767" attributes="0"/>
+                          <Component id="btn_p2_10" max="32767" attributes="0"/>
+                          <Component id="btn_p2_11" max="32767" attributes="0"/>
+                          <Component id="label2" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="label2" max="32767" attributes="0"/>
+                      <Component id="label1" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="label3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="label2" max="32767" attributes="0"/>
-                          <Component id="label1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="btn_p2_1" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_4" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_5" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_6" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_7" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_8" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_9" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_10" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p2_11" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btn_p1_1" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_4" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_5" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_6" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_7" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_8" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_9" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_10" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Component id="btn_p1_11" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btn_p2_1" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_2" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_4" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_5" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_6" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_7" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_8" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_9" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_10" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p2_11" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btn_dice1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btn_dice2" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="btn_dice3" min="-2" pref="60" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btn_dice4" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="btn_dice5" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="btn_dice6" min="-2" pref="60" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="btn_rolldice" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btn_p1_1" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_2" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_4" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_5" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_6" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_7" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_8" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_9" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_10" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Component id="btn_p1_11" min="-2" pref="31" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="pnl_gamer1" min="-2" pref="259" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="txt_name" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btn_connect" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_rival_name" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblplayer" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                                      <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                              <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -296,6 +353,14 @@
                                   <Component id="btn_p2_12" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lbl_rival" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
@@ -313,14 +378,14 @@
                                       <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btn_p1_14" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                                      <Component id="btn_p1_15" min="-2" pref="31" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="btn_p2_14" min="-2" pref="31" max="-2" attributes="0"/>
                                       <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                       <Component id="btn_p2_15" min="-2" pref="31" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="btn_p1_14" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                                      <Component id="btn_p1_15" min="-2" pref="31" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
@@ -332,57 +397,16 @@
                                   <Component id="btn_p2_16" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="label3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_name" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Component id="pnl_gamer1" min="-2" pref="259" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                                      <Component id="txt_rival_name" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btn_connect" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                              <Component id="btn_rolldice" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="401" max="-2" attributes="0"/>
-                              <Component id="lbl_rival" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="lblplayer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btn_dice1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_dice2" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Component id="btn_dice3" min="-2" pref="60" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btn_dice4" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Component id="btn_dice5" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Component id="btn_dice6" min="-2" pref="60" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                              <Component id="lbl_winner_title" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_winner" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="57" max="32767" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -390,6 +414,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txt_name">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
       <AuxValues>
@@ -424,6 +449,7 @@
     <Component class="javax.swing.JTextField" name="txt_rival_name">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Rival"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -434,7 +460,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_8">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -467,7 +493,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_9">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -492,7 +518,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_9">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -525,7 +551,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_10">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -550,7 +576,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_10">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -583,7 +609,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_11">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -608,7 +634,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_11">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -641,7 +667,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_12">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -666,7 +692,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_12">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -699,7 +725,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_13">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -724,7 +750,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_13">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -757,7 +783,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_14">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -782,7 +808,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_14">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -815,7 +841,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_15">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -851,7 +877,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_15">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -873,7 +899,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -909,7 +935,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -931,7 +957,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_16">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -953,7 +979,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -978,7 +1004,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_16">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1000,7 +1026,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1044,7 +1070,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1069,7 +1095,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1102,7 +1128,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1127,7 +1153,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1160,7 +1186,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1185,7 +1211,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1218,7 +1244,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_6">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1243,7 +1269,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_6">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1276,7 +1302,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_7">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1301,7 +1327,7 @@
     <Component class="javax.swing.JButton" name="btn_p2_7">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1334,7 +1360,7 @@
     <Component class="javax.swing.JButton" name="btn_p1_8">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="10" style="0"/>
+          <Font name="Times New Roman" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -1358,6 +1384,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="24" style="0"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Player2"/>
       </Properties>
       <AuxValues>
@@ -1369,6 +1396,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="24" style="0"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Player1"/>
       </Properties>
       <AuxValues>
@@ -1469,26 +1497,62 @@
     <Component class="java.awt.Label" name="label1">
       <Properties>
         <Property name="alignment" type="int" value="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="18" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="You"/>
       </Properties>
     </Component>
     <Component class="java.awt.Label" name="label2">
       <Properties>
         <Property name="alignment" type="int" value="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="18" style="0"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="lbl22" noResource="true"/>
         <Property name="text" type="java.lang.String" value="Rival"/>
       </Properties>
     </Component>
     <Component class="java.awt.Label" name="label3">
       <Properties>
+        <Property name="alignment" type="int" value="1"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI Emoji" size="24" style="1"/>
+          <Font name="Swis721 Hv BT" size="24" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Yahtzee Game"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_winner">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="24" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="99" red="ff" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Player"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_winner_title">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="36" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="99" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="! Winner !"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
