@@ -83,10 +83,7 @@ public class Game extends javax.swing.JFrame {
                     if (RivalSelection == -1 || myselection == -1) {
                       
 
-                        if (myplayable == 0) {
-
-                            // burada oynama hakkı ver
-                        }
+                       
 
                     }// eğer iki seçim yapılmışsa sonuç gösterilebilir.  
                     else {
@@ -121,12 +118,19 @@ public class Game extends javax.swing.JFrame {
         
         btn_connect.setEnabled(true);
         txt_name.setEnabled(true);
-        
-        
-        
-        
-        
+          
 
+    }
+    
+    public void setMyTurn(boolean b){
+       stunnedDices.clear();      
+       btn_rolldice.setEnabled(b);
+       btn_dice1.setEnabled(b);
+       btn_dice2.setEnabled(b);
+       btn_dice3.setEnabled(b);
+       btn_dice4.setEnabled(b);
+       btn_dice5.setEnabled(b);
+       btn_dice6.setEnabled(b);
     }
 
     public void putDices() {
@@ -550,7 +554,6 @@ public class Game extends javax.swing.JFrame {
         label3 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 700));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -924,6 +927,11 @@ public class Game extends javax.swing.JFrame {
         btn_p1_7.setMargin(new java.awt.Insets(0, 0, 0, 0));
         btn_p1_7.setMaximumSize(new java.awt.Dimension(75, 50));
         btn_p1_7.setMinimumSize(new java.awt.Dimension(75, 50));
+        btn_p1_7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_p1_7ActionPerformed(evt);
+            }
+        });
 
         btn_p2_7.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
         btn_p2_7.setText("0");
@@ -955,30 +963,35 @@ public class Game extends javax.swing.JFrame {
         btn_rolldice.setForeground(new java.awt.Color(255, 255, 255));
         btn_rolldice.setText("Roll Dices");
         btn_rolldice.setActionCommand("");
+        btn_rolldice.setEnabled(false);
         btn_rolldice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_rolldiceActionPerformed(evt);
             }
         });
 
+        btn_dice6.setEnabled(false);
         btn_dice6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dice6ActionPerformed(evt);
             }
         });
 
+        btn_dice5.setEnabled(false);
         btn_dice5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dice5ActionPerformed(evt);
             }
         });
 
+        btn_dice4.setEnabled(false);
         btn_dice4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dice4ActionPerformed(evt);
             }
         });
 
+        btn_dice1.setEnabled(false);
         btn_dice1.setPreferredSize(new java.awt.Dimension(60, 60));
         btn_dice1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -986,12 +999,14 @@ public class Game extends javax.swing.JFrame {
             }
         });
 
+        btn_dice2.setEnabled(false);
         btn_dice2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dice2ActionPerformed(evt);
             }
         });
 
+        btn_dice3.setEnabled(false);
         btn_dice3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dice3ActionPerformed(evt);
@@ -1365,6 +1380,7 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void toggleDice(JButton btn) {
+        if(counter!=0){ //ilk turda zar stunlamayı kapatıyorum.
 
         if (isDiceStun(btn)) {
             stunnedDices.remove(btn);
@@ -1396,6 +1412,7 @@ public class Game extends javax.swing.JFrame {
 
             }
 
+        }
         }
     }
 
@@ -1446,18 +1463,22 @@ public class Game extends javax.swing.JFrame {
     }
     
     public void sendPntSelection(JButton btn){
+        
         String m=String.valueOf(getIndexofPointBtn(btn));
         m+="-";
         m+=btn.getText();        
         Message msg = new Message(Message.Message_Type.PNTSELECT);
         msg.content = m;
+        counter=0;
+        setMyTurn(false);
         Client.Send(msg);
         
     }
     
     private void btn_rolldiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rolldiceActionPerformed
         // TODO add your handling code here:
-
+        counter++;
+        if(counter==3)btn_rolldice.setEnabled(false);
         rollthedices();
 
         rolledDicesAsInt = 0;
@@ -1474,6 +1495,8 @@ public class Game extends javax.swing.JFrame {
         msg.content = rolledDicesAsInt;
         Client.Send(msg);
 
+        // zar atma hakkı bittiyse durdur
+        
 
     }//GEN-LAST:event_btn_rolldiceActionPerformed
 
@@ -1514,7 +1537,7 @@ public class Game extends javax.swing.JFrame {
     }
     private void btn_p1_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_4ActionPerformed
         // TODO add your handling code here:
-
+         
         myList[getIndexofPointBtn(btn_p1_4)] = String.valueOf(btn_p1_4.getText());
         btn_p1_4.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1531,6 +1554,7 @@ public class Game extends javax.swing.JFrame {
 
     private void btn_p1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_1ActionPerformed
         // TODO add your handling code here:
+       
         myList[getIndexofPointBtn(btn_p1_1)] = String.valueOf(btn_p1_1.getText());
         btn_p1_1.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1541,6 +1565,7 @@ public class Game extends javax.swing.JFrame {
 
     private void btn_p1_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_2ActionPerformed
         // TODO add your handling code here:
+         
         myList[getIndexofPointBtn(btn_p1_2)] = String.valueOf(btn_p1_2.getText());
         btn_p1_2.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1550,6 +1575,7 @@ public class Game extends javax.swing.JFrame {
 
     private void btn_p1_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_3ActionPerformed
         // TODO add your handling code here:
+         
           myList[getIndexofPointBtn(btn_p1_3)] = String.valueOf(btn_p1_3.getText());
         btn_p1_3.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1558,6 +1584,7 @@ public class Game extends javax.swing.JFrame {
 
     private void btn_p1_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_5ActionPerformed
         // TODO add your handling code here:
+        
           myList[getIndexofPointBtn(btn_p1_5)] = String.valueOf(btn_p1_5.getText());
         btn_p1_5.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1566,6 +1593,7 @@ public class Game extends javax.swing.JFrame {
 
     private void btn_p1_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_6ActionPerformed
         // TODO add your handling code here:
+         
           myList[getIndexofPointBtn(btn_p1_6)] = String.valueOf(btn_p1_6.getText());
         btn_p1_6.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1619,6 +1647,10 @@ public class Game extends javax.swing.JFrame {
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_14);
     }//GEN-LAST:event_btn_p1_14ActionPerformed
+
+    private void btn_p1_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_p1_7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,9 +7,6 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[900, 700]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -1294,6 +1291,9 @@
           <Dimension value="[75, 50]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_p1_7ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -1388,6 +1388,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Roll Dices"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_rolldiceActionPerformed"/>
@@ -1397,6 +1398,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btn_dice6">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dice6ActionPerformed"/>
       </Events>
@@ -1405,6 +1409,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btn_dice5">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dice5ActionPerformed"/>
       </Events>
@@ -1413,6 +1420,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btn_dice4">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dice4ActionPerformed"/>
       </Events>
@@ -1422,6 +1432,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_dice1">
       <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[60, 60]"/>
         </Property>
@@ -1434,6 +1445,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btn_dice2">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dice2ActionPerformed"/>
       </Events>
@@ -1442,6 +1456,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btn_dice3">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dice3ActionPerformed"/>
       </Events>

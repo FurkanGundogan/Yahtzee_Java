@@ -57,12 +57,14 @@ class Listen extends Thread {
                         break;
                     case PLAYABLE:
                         Game.ThisGame.myplayable=(int)received.content;
+                        if((int)received.content==1)Game.ThisGame.setMyTurn(true);
                         break;
                     case DICECLICK:
                         Game.ThisGame.toggleRivalDice(received.content.toString());
                         break;
                     case PNTSELECT:
                         Game.ThisGame.writeRivalPnt(received.content.toString());
+                        Game.ThisGame.setMyTurn(true);
                         break;
                 }
 
