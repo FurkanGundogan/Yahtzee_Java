@@ -131,8 +131,6 @@ public class Game extends javax.swing.JFrame {
 
     }
 
-
-
     public void setDimensions() {
         // Liste butonlarını iki ayrı arrayliste atmak
         // ve bu buttonların boylarını sabitleme
@@ -222,6 +220,7 @@ public class Game extends javax.swing.JFrame {
             if (isDiceStun(btn)) {
                 // Zaten stun durumundaysa stunu kaldırıyorum.
                 stunnedDices.remove(btn);
+                stunEffect(btn, false);
                 //   unStun edilenlerin tekrar yerine dönmesi
                 //   btn.setLocation(btn.getLocation().x, btn.getLocation().y + 200);
 
@@ -238,6 +237,7 @@ public class Game extends javax.swing.JFrame {
             } else {
                 if (stunnedDices.size() < 6) {
                     stunnedDices.add(btn);
+                    stunEffect(btn, true);
                     // stun edilenlerin yukarı çekilmesi.
                     //  btn.setLocation(btn.getLocation().x, btn.getLocation().y - 200);
 
@@ -268,6 +268,55 @@ public class Game extends javax.swing.JFrame {
         }
 
         return state;
+    }
+
+    public void stunEffect(JButton dice, boolean state) {
+        int i = findDice(dice);
+
+        if (state) {
+            switch (rolledDices[i]) {
+                case 1:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s1.png"));
+                    break;
+                case 2:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s2.png"));
+                    break;
+                case 3:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s3.png"));
+                    break;
+                case 4:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s4.png"));
+                    break;
+                case 5:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s5.png"));
+                    break;
+                case 6:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s6.png"));
+                    break;
+            }
+        } else {
+            switch (rolledDices[i]) {
+                case 1:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//1.png"));
+                    break;
+                case 2:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//2.png"));
+                    break;
+                case 3:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//3.png"));
+                    break;
+                case 4:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//4.png"));
+                    break;
+                case 5:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//5.png"));
+                    break;
+                case 6:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//6.png"));
+                    break;
+            }
+        }
+
     }
 
     public int findDice(JButton btn) {
@@ -344,25 +393,28 @@ public class Game extends javax.swing.JFrame {
         for (int i = 5; i >= 0; i--) {
             rolledDices[i] = subnumber % 10;
             subnumber /= 10;
-            switch (rolledDices[i]) {
-                case 1:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//1.png"));
-                    break;
-                case 2:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//2.png"));
-                    break;
-                case 3:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//3.png"));
-                    break;
-                case 4:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//4.png"));
-                    break;
-                case 5:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//5.png"));
-                    break;
-                case 6:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//6.png"));
-                    break;
+            if (!isDiceStun(rollableDices.get(i))) {
+                // Stun durumundaysa mavi kalacak, değilse gelen zar resmi atanacak
+                switch (rolledDices[i]) {
+                    case 1:
+                        rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//1.png"));
+                        break;
+                    case 2:
+                        rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//2.png"));
+                        break;
+                    case 3:
+                        rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//3.png"));
+                        break;
+                    case 4:
+                        rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//4.png"));
+                        break;
+                    case 5:
+                        rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//5.png"));
+                        break;
+                    case 6:
+                        rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//6.png"));
+                        break;
+                }
             }
         }
 
