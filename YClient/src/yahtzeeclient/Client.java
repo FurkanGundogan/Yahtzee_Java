@@ -38,25 +38,30 @@ class Listen extends Thread {
                     case RivalConnected:
                         String name = received.content.toString();
                         Game.ThisGame.txt_rival_name.setText(name);
-                        Game.ThisGame.lbl_rival.setText(name); 
+                        Game.ThisGame.lbl_rival.setText(name);
                         Game.ThisGame.tmr_slider.start();
                         break;
                     case Disconnect:
                         break;
                     case ROLL:
+                        // ROLL mesajı karşıdan gelen zarları alır ve ekrana düzelterek basar.
                         Game.ThisGame.rolledDicesAsInt = (int) received.content;
                         Game.ThisGame.putDices();
                         break;
                     case PLAYABLE:
+                        // Başlangıçta, bağlanma durumuna göre gelen 0 ve 1 sayılarıyla
+                        // İkinci oyuncu oyuna başlar.
                         Game.ThisGame.myplayable = (int) received.content;
                         if ((int) received.content == 1) {
                             Game.ThisGame.setMyTurn(true);
                         }
                         break;
                     case DICECLICK:
+                        // Karşı tarafın Stun işlemlerini görebilmek için.
                         Game.ThisGame.toggleRivalDice(received.content.toString());
                         break;
                     case PNTSELECT:
+                        // Karşı taraf bir seçip yaptıysa bunu kendi ekranında onun listesine yazar.
                         Game.ThisGame.writeRivalPnt(received.content.toString());
                         Game.ThisGame.setMyTurn(true);
                         break;
@@ -65,11 +70,11 @@ class Listen extends Thread {
             } catch (IOException ex) {
 
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                
+
                 break;
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                
+
                 break;
             }
         }

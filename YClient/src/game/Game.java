@@ -131,113 +131,7 @@ public class Game extends javax.swing.JFrame {
 
     }
 
-    public void Reset() {
 
-        if (Client.socket != null) {
-            if (Client.socket.isConnected()) {
-                Client.Stop();
-            }
-        }
-
-        btn_connect.setEnabled(true);
-        txt_name.setEnabled(true);
-
-    }
-
-    public void finishGame() {
-        // Her iki listeyi de gezerek
-        // Tarafların puan hesaplamaları yapılır.
-        // En son kazanan açıklanır.
-
-        int mP = 0;
-        int rP = 0;
-        for (int i = 0; i < 6; i++) {
-            mP += Integer.valueOf(myPoints.get(i).getText());
-            rP += Integer.valueOf(rivalPoints.get(i).getText());
-        }
-        myPoints.get(6).setText(String.valueOf(mP));
-        myPoints.get(6).setForeground(Color.blue);
-        rivalPoints.get(6).setText(String.valueOf(rP));
-        rivalPoints.get(6).setForeground(Color.blue);
-        if (mP > 62) {
-            mP += 35;
-            myPoints.get(7).setText("35");
-            myPoints.get(7).setForeground(Color.green);
-
-        }
-        if (rP > 62) {
-            rP += 35;
-            rivalPoints.get(7).setText("35");
-            rivalPoints.get(7).setForeground(Color.red);
-        }
-
-        for (int i = 8; i < 16; i++) {
-            mP += Integer.valueOf(myPoints.get(i).getText());
-            rP += Integer.valueOf(rivalPoints.get(i).getText());
-        }
-
-        myPoints.get(15).setText(String.valueOf(mP));
-        myPoints.get(15).setForeground(Color.green);
-        rivalPoints.get(15).setText(String.valueOf(rP));
-        rivalPoints.get(15).setForeground(Color.red);
-
-        if (mP > rP) {
-            lbl_winner.setText(lblplayer.getText());
-            lbl_winner.setForeground(Color.green);
-        } else if (rP > mP) {
-            lbl_winner.setText(lbl_rival.getText());
-            lbl_winner.setForeground(Color.red);
-        } else {
-            lbl_winner.setText("Tie Game");
-        }
-        lbl_winner_title.setVisible(true);
-        lbl_winner.setVisible(true);
-
-    }
-
-    public void setMyTurn(boolean b) {
-        // Client'ın o anda oynama ya da bekleme durumunu erişim engelleyerek düzenler.
-        stunnedDices.clear();
-        btn_rolldice.setEnabled(b);
-        btn_dice1.setEnabled(b);
-        btn_dice2.setEnabled(b);
-        btn_dice3.setEnabled(b);
-        btn_dice4.setEnabled(b);
-        btn_dice5.setEnabled(b);
-        btn_dice6.setEnabled(b);
-    }
-
-    public void putDices() {
-        // Atılmış zarları switch case yapısıyla kontrol ederek
-        // Doğru zar fotografini gösterir.
-        int subnumber = rolledDicesAsInt;
-
-        for (int i = 5; i >= 0; i--) {
-            rolledDices[i] = subnumber % 10;
-            subnumber /= 10;
-            switch (rolledDices[i]) {
-                case 1:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//1.png"));
-                    break;
-                case 2:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//2.png"));
-                    break;
-                case 3:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//3.png"));
-                    break;
-                case 4:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//4.png"));
-                    break;
-                case 5:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//5.png"));
-                    break;
-                case 6:
-                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//6.png"));
-                    break;
-            }
-        }
-
-    }
 
     public void setDimensions() {
         // Liste butonlarını iki ayrı arrayliste atmak
@@ -305,6 +199,173 @@ public class Game extends javax.swing.JFrame {
         rollableDices.add(btn_dice4);
         rollableDices.add(btn_dice5);
         rollableDices.add(btn_dice6);
+    }
+
+    public void setMyTurn(boolean b) {
+        // Client'ın o anda oynama ya da bekleme durumunu erişim engelleyerek düzenler.
+        stunnedDices.clear();
+        btn_rolldice.setEnabled(b);
+        btn_dice1.setEnabled(b);
+        btn_dice2.setEnabled(b);
+        btn_dice3.setEnabled(b);
+        btn_dice4.setEnabled(b);
+        btn_dice5.setEnabled(b);
+        btn_dice6.setEnabled(b);
+    }
+
+    public void toggleDice(JButton btn) {
+        // Stunlamayı toggle eden fonksiyon.
+        if (counter != 0) {
+            // İlk turda zar stunlamayı engelliyorum.
+            // Çünkü son durum, karşı tarafın attığı durum.
+
+            if (isDiceStun(btn)) {
+                // Zaten stun durumundaysa stunu kaldırıyorum.
+                stunnedDices.remove(btn);
+                //   unStun edilenlerin tekrar yerine dönmesi
+                //   btn.setLocation(btn.getLocation().x, btn.getLocation().y + 200);
+
+                // DICECLICK ile bu stun durumu bilgisinin karşı tarafın da almasını sağlıyorum.
+                String cont = "";
+                Message msg = new Message(Message.Message_Type.DICECLICK);
+                int x = findDice(btn);
+                cont += String.valueOf(x);
+                cont += "-up";
+                // index + location şeklinde bir mesaj gidiyor.
+                msg.content = cont;
+                Client.Send(msg);
+
+            } else {
+                if (stunnedDices.size() < 6) {
+                    stunnedDices.add(btn);
+                    // stun edilenlerin yukarı çekilmesi.
+                    //  btn.setLocation(btn.getLocation().x, btn.getLocation().y - 200);
+
+                    // index + location şeklinde bir mesaj gidiyor.
+                    String cont = "";
+                    Message msg = new Message(Message.Message_Type.DICECLICK);
+                    int x = findDice(btn);
+                    cont += String.valueOf(x);
+                    cont += "-down";
+                    // index + location şeklinde bir mesaj gidiyor.
+                    msg.content = cont;
+                    Client.Send(msg);
+
+                }
+
+            }
+        }
+    }
+
+    public boolean isDiceStun(JButton dice) {
+        // Zarlar için dondurulma durumu kontrolü
+        boolean state = false;
+        for (JButton x : stunnedDices) {
+            if (dice.equals(x)) {
+                state = true;
+                break;
+            }
+        }
+
+        return state;
+    }
+
+    public int findDice(JButton btn) {
+        // Tüm zarlar arasından bir zarı getirmek için ayarladığım fonksiyon.
+        int index = 0;
+        for (JButton r : rollableDices) {
+            if (r.equals(btn)) {
+                break;
+            }
+            index++;
+        }
+        return index;
+    }
+
+    public void toggleRivalDice(String msg) {
+        // Client'a gelen mesaj sonucunca çalışır.
+        // Karşı tarafın bir zarı durdurması durumunda
+        // bu bilgi kendisine gelir ve ekranda iki tarafın da aynı
+        // zarları görmesini sağlar.
+        String[] elements = msg.split("-");
+
+        int indext = Integer.valueOf(elements[0]);
+        String move = elements[1];
+
+        if (move.equals("up")) {
+            //  rollableDices.get(indext).setLocation(rollableDices.get(indext).getLocation().x, (rollableDices.get(indext).getLocation().y) - 200);
+        } else if (move.equals("down")) {
+            //  rollableDices.get(indext).setLocation(rollableDices.get(indext).getLocation().x, (rollableDices.get(indext).getLocation().y) + 200);
+        }
+
+    }
+
+    public void rollthedices() {
+        // Tüm zarları gezer ve eğer zar
+        // Stun olanların olduğu arraylistte yoksa
+        // Zarı random numarayla atar.
+
+        for (int i = 0; i < 6; i++) {
+            if (!isDiceStun(rollableDices.get(i))) {
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+
+                switch (randomNum) {
+                    case 1:
+                        rolledDices[i] = 1;
+                        break;
+                    case 2:
+                        rolledDices[i] = 2;
+                        break;
+                    case 3:
+                        rolledDices[i] = 3;
+                        break;
+                    case 4:
+                        rolledDices[i] = 4;
+                        break;
+                    case 5:
+                        rolledDices[i] = 5;
+                        break;
+                    case 6:
+                        rolledDices[i] = 6;
+                        break;
+
+                }
+
+            }
+        }
+
+    }
+
+    public void putDices() {
+        // Atılmış zarları switch case yapısıyla kontrol ederek
+        // Doğru zar fotografini gösterir.
+        int subnumber = rolledDicesAsInt;
+
+        for (int i = 5; i >= 0; i--) {
+            rolledDices[i] = subnumber % 10;
+            subnumber /= 10;
+            switch (rolledDices[i]) {
+                case 1:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//1.png"));
+                    break;
+                case 2:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//2.png"));
+                    break;
+                case 3:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//3.png"));
+                    break;
+                case 4:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//4.png"));
+                    break;
+                case 5:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//5.png"));
+                    break;
+                case 6:
+                    rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//6.png"));
+                    break;
+            }
+        }
+
     }
 
     public void showPointsonList() {
@@ -568,6 +629,36 @@ public class Game extends javax.swing.JFrame {
         }
     }
 
+    public void sendPntSelection(JButton btn) {
+        // Client'ın attığı zarlar sonucu elde ettiği
+        // Puanlardan birini seçmesi ve bu bilgiyi karşıya da göndermesi.
+        // Bu mesaj "butonNo+Puan" şeklinde gidiyor.
+
+        myRoundNum++;
+        String m = String.valueOf(getIndexofPointBtn(btn));
+        m += "-";
+        m += btn.getText();
+        Message msg = new Message(Message.Message_Type.PNTSELECT);
+        msg.content = m;
+        counter = 0;
+        setMyTurn(false);
+        Client.Send(msg);
+
+    }
+
+    public int getIndexofPointBtn(JButton btn) {
+        // Bazı durumlarda butonun listede kaçıncı sırada olduğunu bulmak için
+        // yazdığım fonksiyon
+        int index = 0;
+        for (int i = 0; i < myPoints.size(); i++) {
+            if (myPoints.get(i).equals(btn)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
     public void puttBackUnSelectedPnts() {
         // O anki oyuncunun zar atma sonucu elde ettiği puanlarda oluşan listeden
         // Bir eleman seçildikten sonra, kalan elemanlar tekrar sıfırlanır ve eski duruma döner.
@@ -577,6 +668,68 @@ public class Game extends javax.swing.JFrame {
                 m.setEnabled(false);
             }
         }
+    }
+
+    public void writeRivalPnt(String msg) {
+        // Client'a gelen mesaj durumunda çalışır
+        // Karşı tarafın listeden seçenek yapmasıyla
+        // Client, rival taraftaki listeye onun puanını yazar.
+        rivalRoundNum++;
+        String[] items = msg.split("-");
+        int index = Integer.valueOf(items[0]);
+        rivalPoints.get(index).setText(items[1]);
+
+    }
+
+    public void finishGame() {
+        // Her iki listeyi de gezerek
+        // Tarafların puan hesaplamaları yapılır.
+        // En son kazanan açıklanır.
+
+        int mP = 0;
+        int rP = 0;
+        for (int i = 0; i < 6; i++) {
+            mP += Integer.valueOf(myPoints.get(i).getText());
+            rP += Integer.valueOf(rivalPoints.get(i).getText());
+        }
+        myPoints.get(6).setText(String.valueOf(mP));
+        myPoints.get(6).setForeground(Color.blue);
+        rivalPoints.get(6).setText(String.valueOf(rP));
+        rivalPoints.get(6).setForeground(Color.blue);
+        if (mP > 62) {
+            mP += 35;
+            myPoints.get(7).setText("35");
+            myPoints.get(7).setForeground(Color.green);
+
+        }
+        if (rP > 62) {
+            rP += 35;
+            rivalPoints.get(7).setText("35");
+            rivalPoints.get(7).setForeground(Color.red);
+        }
+
+        for (int i = 8; i < 16; i++) {
+            mP += Integer.valueOf(myPoints.get(i).getText());
+            rP += Integer.valueOf(rivalPoints.get(i).getText());
+        }
+
+        myPoints.get(15).setText(String.valueOf(mP));
+        myPoints.get(15).setForeground(Color.green);
+        rivalPoints.get(15).setText(String.valueOf(rP));
+        rivalPoints.get(15).setForeground(Color.red);
+
+        if (mP > rP) {
+            lbl_winner.setText(lblplayer.getText());
+            lbl_winner.setForeground(Color.green);
+        } else if (rP > mP) {
+            lbl_winner.setText(lbl_rival.getText());
+            lbl_winner.setForeground(Color.red);
+        } else {
+            lbl_winner.setText("Tie Game");
+        }
+        lbl_winner_title.setVisible(true);
+        lbl_winner.setVisible(true);
+
     }
 
     /**
@@ -1476,93 +1629,6 @@ public class Game extends javax.swing.JFrame {
         Client.Stop();
     }//GEN-LAST:event_formWindowClosing
 
-    public boolean isDiceStun(JButton dice) {
-        // Zarlar için dondurulma durumu kontrolü
-        boolean state = false;
-        for (JButton x : stunnedDices) {
-            if (dice.equals(x)) {
-                state = true;
-                break;
-            }
-        }
-
-        return state;
-    }
-
-    public int findDice(JButton btn) {
-        // Tüm zarlar arasından bir zarı getirmek için ayarladığım fonksiyon.
-        int index = 0;
-        for (JButton r : rollableDices) {
-            if (r.equals(btn)) {
-                break;
-            }
-            index++;
-        }
-        return index;
-    }
-
-    public void toggleRivalDice(String msg) {
-        // Client'a gelen mesaj sonucunca çalışır.
-        // Karşı tarafın bir zarı durdurması durumunda
-        // bu bilgi kendisine gelir ve ekranda iki tarafın da aynı
-        // zarları görmesini sağlar.
-        String[] elements = msg.split("-");
-
-        int indext = Integer.valueOf(elements[0]);
-        String move = elements[1];
-
-        if (move.equals("up")) {
-            //  rollableDices.get(indext).setLocation(rollableDices.get(indext).getLocation().x, (rollableDices.get(indext).getLocation().y) - 200);
-        } else if (move.equals("down")) {
-            //  rollableDices.get(indext).setLocation(rollableDices.get(indext).getLocation().x, (rollableDices.get(indext).getLocation().y) + 200);
-        }
-
-    }
-
-    public void toggleDice(JButton btn) {
-        // Stunlamayı toggle eden fonksiyon.
-        if (counter != 0) {
-            // İlk turda zar stunlamayı engelliyorum.
-            // Çünkü son durum, karşı tarafın attığı durum.
-
-            if (isDiceStun(btn)) {
-                // Zaten stun durumundaysa stunu kaldırıyorum.
-                stunnedDices.remove(btn);
-                //   unStun edilenlerin tekrar yerine dönmesi
-                //   btn.setLocation(btn.getLocation().x, btn.getLocation().y + 200);
-
-                // DICECLICK ile bu stun durumu bilgisinin karşı tarafın da almasını sağlıyorum.
-                String cont = "";
-                Message msg = new Message(Message.Message_Type.DICECLICK);
-                int x = findDice(btn);
-                cont += String.valueOf(x);
-                cont += "-up";
-                // index + location şeklinde bir mesaj gidiyor.
-                msg.content = cont;
-                Client.Send(msg);
-
-            } else {
-                if (stunnedDices.size() < 3) {
-                    stunnedDices.add(btn);
-                    // stun edilenlerin yukarı çekilmesi.
-                    //  btn.setLocation(btn.getLocation().x, btn.getLocation().y - 200);
-
-                    // index + location şeklinde bir mesaj gidiyor.
-                    String cont = "";
-                    Message msg = new Message(Message.Message_Type.DICECLICK);
-                    int x = findDice(btn);
-                    cont += String.valueOf(x);
-                    cont += "-down";
-                    // index + location şeklinde bir mesaj gidiyor.
-                    msg.content = cont;
-                    Client.Send(msg);
-
-                }
-
-            }
-        }
-    }
-
 
     private void btn_dice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice1ActionPerformed
         // Framedaki tüm zarlar için;
@@ -1572,82 +1638,6 @@ public class Game extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btn_dice1ActionPerformed
-    public void rollthedices() {
-        // Tüm zarları gezer ve eğer zar
-        // Stun olanların olduğu arraylistte yoksa
-        // Zarı random numarayla atar.
-
-        for (int i = 0; i < 6; i++) {
-            if (!isDiceStun(rollableDices.get(i))) {
-                int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-
-                switch (randomNum) {
-                    case 1:
-                        rolledDices[i] = 1;
-                        break;
-                    case 2:
-                        rolledDices[i] = 2;
-                        break;
-                    case 3:
-                        rolledDices[i] = 3;
-                        break;
-                    case 4:
-                        rolledDices[i] = 4;
-                        break;
-                    case 5:
-                        rolledDices[i] = 5;
-                        break;
-                    case 6:
-                        rolledDices[i] = 6;
-                        break;
-
-                }
-
-            }
-        }
-
-    }
-
-    public void sendPntSelection(JButton btn) {
-        // Client'ın attığı zarlar sonucu elde ettiği
-        // Puanlardan birini seçmesi ve bu bilgiyi karşıya da göndermesi.
-        // Bu mesaj "butonNo+Puan" şeklinde gidiyor.
-
-        myRoundNum++;
-        String m = String.valueOf(getIndexofPointBtn(btn));
-        m += "-";
-        m += btn.getText();
-        Message msg = new Message(Message.Message_Type.PNTSELECT);
-        msg.content = m;
-        counter = 0;
-        setMyTurn(false);
-        Client.Send(msg);
-
-    }
-
-    public void writeRivalPnt(String msg) {
-        // Client'a gelen mesaj durumunda çalışır
-        // Karşı tarafın listeden seçenek yapmasıyla
-        // Client, rival taraftaki listeye onun puanını yazar.
-        rivalRoundNum++;
-        String[] items = msg.split("-");
-        int index = Integer.valueOf(items[0]);
-        rivalPoints.get(index).setText(items[1]);
-
-    }
-
-    public int getIndexofPointBtn(JButton btn) {
-        // Bazı durumlarda butonun listede kaçıncı sırada olduğunu bulmak için
-        // yazdığım fonksiyon
-        int index = 0;
-        for (int i = 0; i < myPoints.size(); i++) {
-            if (myPoints.get(i).equals(btn)) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
 
 
     private void btn_rolldiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rolldiceActionPerformed
