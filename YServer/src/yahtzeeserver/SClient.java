@@ -13,7 +13,8 @@ import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static game.Message.Message_Type.Selected;
+
+
 /**
  *
  * @author INSECT
@@ -90,12 +91,6 @@ public class SClient {
                             //gelen mesaji direkt rakibe gönder
                             Server.Send(TheClient.rival, received);
                             break;
-                        case Selected:
-                            //gelen seçim yapıldı mesajını rakibe gönder
-                            Server.Send(TheClient.rival, received);
-                            break;
-                        case Bitis:
-                            break;
                         case PLAYABLE:
                             Server.Send(TheClient.rival, received);
                             break;
@@ -140,7 +135,7 @@ public class SClient {
                     //sadece bir client içeri grebilir
                     //diğerleri release olana kadar bekler
                     Server.pairTwo.acquire(1);
-                    
+
                     //client eğer eşleşmemişse gir
                     if (!TheClient.paired) {
                         SClient crival = null;
@@ -150,8 +145,7 @@ public class SClient {
                             for (SClient clnt : Server.Clients) {
                                 if (TheClient != clnt && clnt.rival == null) {
                                     //eşleşme sağlandı ve gerekli işaretlemeler yapıldı
-                                 //   System.out.println("Bunun_id:"+TheClient.id);
-                               //     System.out.println("Bunun_id:"+TheClient.rival.id);
+
                                     crival = clnt;
                                     crival.paired = true;
                                     crival.rival = TheClient;
@@ -170,24 +164,21 @@ public class SClient {
                         Message msg1 = new Message(Message.Message_Type.RivalConnected);
                         msg1.content = TheClient.name;
                         Server.Send(TheClient.rival, msg1);
-                        
-                               
-                        
+
                         Message msg2 = new Message(Message.Message_Type.RivalConnected);
                         msg2.content = TheClient.rival.name;
                         Server.Send(TheClient, msg2);
-                        
-                        
-                        
+
                         // birinci oyuncunun baslaması icin iki tarafa da kendi idlerini veriyorum
-                        // daha sonra bu idleri playable değiskenlerine atıyorum ve ilerde sıra kontrolü icin kullaniyorum.
+                        // daha sonra bu idleri playable değiskenlerine atıyorum 
+                        // bu şekilde ikinci bağlanan oyuna başlıyor.
                         Message msg3 = new Message(Message.Message_Type.PLAYABLE);
-                        int a=0;
+                        int a = 0;
                         msg3.content = a;
-                        Server.Send(TheClient, msg3); 
-                        
+                        Server.Send(TheClient, msg3);
+
                         Message msg4 = new Message(Message.Message_Type.PLAYABLE);
-                        int b=1;
+                        int b = 1;
                         msg4.content = b;
                         Server.Send(TheClient.rival, msg4);
 

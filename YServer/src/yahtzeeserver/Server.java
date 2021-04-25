@@ -35,7 +35,7 @@ class ServerThread extends Thread {
                 //gelen client soketinden bir sclient nesnesi oluştur
                 //bir adet id de kendimiz verdik
                 SClient nclient = new SClient(clientSocket, Server.IdClient);
-                
+
                 Server.IdClient++;
                 //clienti listeye ekle.
                 Server.Clients.add(nclient);
@@ -86,7 +86,7 @@ public class Server {
     }
 
     // serverdan clietlara mesaj gönderme
-    //clieti alıyor ve mesaj olluyor
+    //clieti alıyor ve mesaj yolluyor
     public static void Send(SClient cl, Message msg) {
 
         try {

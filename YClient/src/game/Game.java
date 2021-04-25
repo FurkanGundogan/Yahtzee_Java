@@ -27,35 +27,50 @@ import java.awt.Color;
  */
 public class Game extends javax.swing.JFrame {
 
-    //framedeki komponentlere erişim için satatik oyun değişkeni
+    //statik oyun değişkeni
     public static Game ThisGame;
-    //ekrandaki resim değişimi için timer yerine thread
-    public Thread tmr_slider;
-    //karşı tarafın seçimi seçim -1 deyse seçilmemiş
-    public int RivalSelection = -1;
-    //benim seçimim seçim -1 deyse seçilmemiş
-    public int myselection = -1;
 
+    public Thread tmr_slider;
+
+    // Oyun durumu: bitiş durumu için kontrol ediliyor.
+    public int gameState = -1;
+
+    // Birinci ve ikinci oyuncu için farklı değerler alır. 1 olan başlar.
     public int myplayable = 0;
+
+    // Birden fazla yahtzee yapması durumu kontrolü için tutulan değişken.
     public int myYahtzeeCount = 0;
 
-    public int myRoundNum=0;
-    public int rivalRoundNum=0;
-    //icon dizileri
+    // 13'e kadar sınırlı olan round sayıları.
+    public int myRoundNum = 0;
+    public int rivalRoundNum = 0;
 
+    // Zar atmak için rand değişkeni.
     Random rand;
 
-    int round = 1;
+    // Aslında tüm zarlar da denebilir.
     public ArrayList<JButton> rollableDices;
+
+    // Stun durumundaki zarların listesi.
     public ArrayList<JButton> stunnedDices;
+
+    // Sağ bölümdeki Client'ın puan listesi(butonlar)
     public ArrayList<JButton> myPoints;
+
+    // Sağ bölümdeki Rival'in puan listesi(butonlar)
     public ArrayList<JButton> rivalPoints;
+
+    // Random atılan zarların sayı değerlerinin dizisi
     public int[] rolledDices = new int[6];
 
+    // Zarları mesaj olarak gönderirken diziyi tamsayıya çeviriyorum.
     public int rolledDicesAsInt = 111111;
 
+    // Sağ tarafta, kullanıcının butonlarına denk gelen puan listesi
+    // O butonlardan her seçim yapıldığında bu listeye yazılıyor.
     public String[] myList = new String[16];
 
+    // O anki oyuncunun 3 defa zar atabilmesi için tutulan değişken.
     public int counter = 0;
 
     /**
@@ -67,6 +82,7 @@ public class Game extends javax.swing.JFrame {
         ThisGame = this;
         lbl_winner.setVisible(false);
         lbl_winner_title.setVisible(false);
+
         rand = new Random();
         rollableDices = new ArrayList<JButton>();
         stunnedDices = new ArrayList<JButton>();
@@ -75,47 +91,36 @@ public class Game extends javax.swing.JFrame {
         this.setDimensions();
         putDicesToList();
 
-        
-       
-        // resimleri döndürmek için tread aynı zamanda oyun bitiminide takip ediyor
         tmr_slider = new Thread(() -> {
-           
+
             //soket bağlıysa dönsün
             while (Client.socket.isConnected()) {
-              // endGameControl(myRoundNum,rivalRoundNum);
-                
+
                 try {
-                   
-                    if (RivalSelection == -1 || myselection == -1 ) {
-                       
-                         Client.Display("ben:"+myRoundNum+" - rival:"+rivalRoundNum+"\n Oyun Bitti:");
-                         if (myRoundNum == 3 && rivalRoundNum == 3 ) {
-                             Thread.sleep(10);
-                              finishGame();
-                              Thread.sleep(10);
-                             setMyTurn(false);
-                             //
-                             //
-                            
-                            // Thread.sleep(2);
-                           //  btn_connect.setEnabled(true);
-                           //  txt_name.setEnabled(true);
-                             Client.Stop();
-                         }
 
-                    }// eğer iki seçim yapılmışsa sonuç gösterilebilir.  
-                    else {
+                    if (gameState == -1) {
+                        //gameState -1 durumu aktif oyun halidir.
 
-                        
-                        //sonuç el olarak gösterildikten 4 saniye sonra smiley gelsin
+                        Client.Display("ben:" + myRoundNum + " - rival:" + rivalRoundNum + "\n Oyun Bitti:");
+                        if (myRoundNum == 13 && rivalRoundNum == 13) {
+                            // Totalde iki taraf da 13 tur oynadıktan sonra oyun tamamlanır.
+                            Thread.sleep(10);
+                            finishGame();
+                            Thread.sleep(10);
+                            setMyTurn(false);
+
+                            Thread.sleep(2);
+                            gameState = 1;
+                            // gameState 1 olduğunda artık oyun döngüsü bitmiş oluyor ve else koşuluna düşüyor.
+
+                        }
+
+                    } else {
+                        // Oyun durumu değiştikten sonra client durur.
                         Thread.sleep(4000);
-                        //smiley sonuç resimleri
-                       
+                        Client.Stop();
                         tmr_slider.stop();
-
-                        //7 saniye sonra oyun bitsin tekrar bağlansın
                         Thread.sleep(7000);
-                        //Reset();
 
                     }
                 } catch (InterruptedException ex) {
@@ -127,81 +132,84 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void Reset() {
-        
+
         if (Client.socket != null) {
             if (Client.socket.isConnected()) {
                 Client.Stop();
             }
         }
-        
+
         btn_connect.setEnabled(true);
         txt_name.setEnabled(true);
-          
 
     }
-    public void finishGame(){
 
-        
-        int mP=0;
-        int rP=0;
+    public void finishGame() {
+        // Her iki listeyi de gezerek
+        // Tarafların puan hesaplamaları yapılır.
+        // En son kazanan açıklanır.
+
+        int mP = 0;
+        int rP = 0;
         for (int i = 0; i < 6; i++) {
-            mP+=Integer.valueOf(myPoints.get(i).getText());
-            rP+=Integer.valueOf(rivalPoints.get(i).getText());
+            mP += Integer.valueOf(myPoints.get(i).getText());
+            rP += Integer.valueOf(rivalPoints.get(i).getText());
         }
         myPoints.get(6).setText(String.valueOf(mP));
         myPoints.get(6).setForeground(Color.blue);
         rivalPoints.get(6).setText(String.valueOf(rP));
         rivalPoints.get(6).setForeground(Color.blue);
-        if(mP>62){
-            mP+=35;
+        if (mP > 62) {
+            mP += 35;
             myPoints.get(7).setText("35");
             myPoints.get(7).setForeground(Color.green);
-            
-        }      
-        if(rP>62){
-            rP+=35;
+
+        }
+        if (rP > 62) {
+            rP += 35;
             rivalPoints.get(7).setText("35");
             rivalPoints.get(7).setForeground(Color.red);
         }
-                     
-        for (int i = 7; i < 15; i++) {
-            mP+=Integer.valueOf(myPoints.get(i).getText());
-            rP+=Integer.valueOf(rivalPoints.get(i).getText());
+
+        for (int i = 8; i < 16; i++) {
+            mP += Integer.valueOf(myPoints.get(i).getText());
+            rP += Integer.valueOf(rivalPoints.get(i).getText());
         }
-        
+
         myPoints.get(15).setText(String.valueOf(mP));
         myPoints.get(15).setForeground(Color.green);
         rivalPoints.get(15).setText(String.valueOf(rP));
         rivalPoints.get(15).setForeground(Color.red);
-        
-        
-        if(mP>rP){
+
+        if (mP > rP) {
             lbl_winner.setText(lblplayer.getText());
             lbl_winner.setForeground(Color.green);
-        }else if(rP>mP){
+        } else if (rP > mP) {
             lbl_winner.setText(lbl_rival.getText());
             lbl_winner.setForeground(Color.red);
-        }else{
+        } else {
             lbl_winner.setText("Tie Game");
         }
         lbl_winner_title.setVisible(true);
         lbl_winner.setVisible(true);
-        
+
     }
-    
-    public void setMyTurn(boolean b){
-       stunnedDices.clear();      
-       btn_rolldice.setEnabled(b);
-       btn_dice1.setEnabled(b);
-       btn_dice2.setEnabled(b);
-       btn_dice3.setEnabled(b);
-       btn_dice4.setEnabled(b);
-       btn_dice5.setEnabled(b);
-       btn_dice6.setEnabled(b);
+
+    public void setMyTurn(boolean b) {
+        // Client'ın o anda oynama ya da bekleme durumunu erişim engelleyerek düzenler.
+        stunnedDices.clear();
+        btn_rolldice.setEnabled(b);
+        btn_dice1.setEnabled(b);
+        btn_dice2.setEnabled(b);
+        btn_dice3.setEnabled(b);
+        btn_dice4.setEnabled(b);
+        btn_dice5.setEnabled(b);
+        btn_dice6.setEnabled(b);
     }
 
     public void putDices() {
-
+        // Atılmış zarları switch case yapısıyla kontrol ederek
+        // Doğru zar fotografini gösterir.
         int subnumber = rolledDicesAsInt;
 
         for (int i = 5; i >= 0; i--) {
@@ -232,6 +240,12 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void setDimensions() {
+        // Liste butonlarını iki ayrı arrayliste atmak
+        // ve bu buttonların boylarını sabitleme
+        // işlemlerini yapan fonksiyon
+        // Aynı zamanda başlangıçta çağırıldığı için
+        // İlk durum zar fotograflarini basar.
+
         myPoints.add(btn_p1_1);
         myPoints.add(btn_p1_2);
         myPoints.add(btn_p1_3);
@@ -283,6 +297,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void putDicesToList() {
+        // Tüm zarları rollable dizisine atar
+
         rollableDices.add(btn_dice1);
         rollableDices.add(btn_dice2);
         rollableDices.add(btn_dice3);
@@ -292,7 +308,9 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void showPointsonList() {
-
+        // Oyun kurallarına göre zarlardaki puanı hesaplar
+        // Çagirdigi fonksiyonlar bu puanları listede gerekli
+        // yere yazar.
         checkFirstSix();
         check4OfaKindd();
         check3OfaKind();
@@ -304,6 +322,7 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void checkFirstSix() {
+        // Ones-Sixes arası puan işlemlerinin hesabı ve listede gösterilmesi.
         int pnt = 0;
 
         for (int i = 0; i < 6; i++) {
@@ -329,6 +348,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void check3OfaKind() {
+        // Bir zardan üç adet olma durumun kontrolü
+        // Varsa puanın gösterilmesi.
         if (myList[8] == null) {
             boolean found = false;
 
@@ -361,7 +382,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void check4OfaKindd() {
-
+        // Bir zardan dört adet olma durumun kontrolü
+        // Varsa puanın gösterilmesi.
         if (myList[9] == null) {
             boolean found = false;
             int[] counts = new int[6];
@@ -394,7 +416,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void checkFullHouse() {
-
+        // Bir zardan 4 bir zardan da 2 adet olma durumunu kontrol eder.
+        // Varsa puanını gösterir.
         if (myList[10] == null) {
             boolean found = false;
             int[] counts = new int[6];
@@ -433,6 +456,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void checkSmallStr() {
+        // Ardışık dört sayının olup olmadığının kontrolü
+
         if (myList[11] == null) {
             boolean found = false;
             ArrayList<Integer> items = new ArrayList<>();
@@ -466,6 +491,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void checkLargeStr() {
+        // 1'den 6'ya kadar tüm gelme durumu.
+
         if (myList[12] == null) {
             boolean found = false;
             ArrayList<Integer> items = new ArrayList<>();
@@ -493,6 +520,7 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void checkChance() {
+        // Herhangi bir puan için kullanılabilecek Chance seçeneği
         if (myList[13] == null) {
             int pAllDices = 0;
             for (int i = 0; i < 6; i++) {
@@ -505,8 +533,11 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void checkYahtzee() {
-        if (myList[14] == null | myYahtzeeCount>0) {
-            
+        // Yahtzee durumunu kontrol eder.
+        // Eğer ikinci ve daha fazla bir yahtzee durumu olursa da
+        // Ekstra puan verir.
+        if (myList[14] == null | myYahtzeeCount > 0) {
+
             boolean found = true;
             int p = 50;
             for (int i = 0; i < 6; i++) {
@@ -528,7 +559,7 @@ public class Game extends javax.swing.JFrame {
                     myPoints.get(14).setText(String.valueOf(p));
                     myPoints.get(14).setEnabled(true);
                 }
-                
+
             } else {
                 myPoints.get(14).setText("0");
                 myPoints.get(14).setEnabled(true);
@@ -538,6 +569,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void puttBackUnSelectedPnts() {
+        // O anki oyuncunun zar atma sonucu elde ettiği puanlarda oluşan listeden
+        // Bir eleman seçildikten sonra, kalan elemanlar tekrar sıfırlanır ve eski duruma döner.
         for (JButton m : myPoints) {
             if (m.isEnabled()) {
                 m.setText("0");
@@ -1424,7 +1457,7 @@ public class Game extends javax.swing.JFrame {
 
         //bağlanılacak server ve portu veriyoruz
         Client.Start("127.0.0.1", 2000);
-        //başlangıç durumları
+        //başlangıç 
         btn_connect.setEnabled(false);
         txt_name.setEnabled(false);
 
@@ -1438,12 +1471,13 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_connectActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+
         //form kapanırken clienti durdur
         Client.Stop();
     }//GEN-LAST:event_formWindowClosing
 
     public boolean isDiceStun(JButton dice) {
+        // Zarlar için dondurulma durumu kontrolü
         boolean state = false;
         for (JButton x : stunnedDices) {
             if (dice.equals(x)) {
@@ -1456,6 +1490,7 @@ public class Game extends javax.swing.JFrame {
     }
 
     public int findDice(JButton btn) {
+        // Tüm zarlar arasından bir zarı getirmek için ayarladığım fonksiyon.
         int index = 0;
         for (JButton r : rollableDices) {
             if (r.equals(btn)) {
@@ -1467,6 +1502,10 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void toggleRivalDice(String msg) {
+        // Client'a gelen mesaj sonucunca çalışır.
+        // Karşı tarafın bir zarı durdurması durumunda
+        // bu bilgi kendisine gelir ve ekranda iki tarafın da aynı
+        // zarları görmesini sağlar.
         String[] elements = msg.split("-");
 
         int indext = Integer.valueOf(elements[0]);
@@ -1481,50 +1520,63 @@ public class Game extends javax.swing.JFrame {
     }
 
     public void toggleDice(JButton btn) {
-        if(counter!=0){ //ilk turda zar stunlamayı kapatıyorum.
+        // Stunlamayı toggle eden fonksiyon.
+        if (counter != 0) {
+            // İlk turda zar stunlamayı engelliyorum.
+            // Çünkü son durum, karşı tarafın attığı durum.
 
-        if (isDiceStun(btn)) {
-            stunnedDices.remove(btn);
-            //   btn.setLocation(btn.getLocation().x, btn.getLocation().y + 200);
+            if (isDiceStun(btn)) {
+                // Zaten stun durumundaysa stunu kaldırıyorum.
+                stunnedDices.remove(btn);
+                //   unStun edilenlerin tekrar yerine dönmesi
+                //   btn.setLocation(btn.getLocation().x, btn.getLocation().y + 200);
 
-            String cont = "";
-            Message msg = new Message(Message.Message_Type.DICECLICK);
-            int x = findDice(btn);
-            cont += String.valueOf(x);
-            cont += "-up";
-            // index + location şeklinde bir mesaj gidiyor.
-            msg.content = cont;
-            Client.Send(msg);
-
-        } else {
-            if (stunnedDices.size() < 6) {
-                stunnedDices.add(btn);
-                //  btn.setLocation(btn.getLocation().x, btn.getLocation().y - 200);
-
-                // index + location şeklinde bir mesaj gidiyor.
+                // DICECLICK ile bu stun durumu bilgisinin karşı tarafın da almasını sağlıyorum.
                 String cont = "";
                 Message msg = new Message(Message.Message_Type.DICECLICK);
                 int x = findDice(btn);
                 cont += String.valueOf(x);
-                cont += "-down";
+                cont += "-up";
                 // index + location şeklinde bir mesaj gidiyor.
                 msg.content = cont;
                 Client.Send(msg);
 
-            }
+            } else {
+                if (stunnedDices.size() < 3) {
+                    stunnedDices.add(btn);
+                    // stun edilenlerin yukarı çekilmesi.
+                    //  btn.setLocation(btn.getLocation().x, btn.getLocation().y - 200);
 
-        }
+                    // index + location şeklinde bir mesaj gidiyor.
+                    String cont = "";
+                    Message msg = new Message(Message.Message_Type.DICECLICK);
+                    int x = findDice(btn);
+                    cont += String.valueOf(x);
+                    cont += "-down";
+                    // index + location şeklinde bir mesaj gidiyor.
+                    msg.content = cont;
+                    Client.Send(msg);
+
+                }
+
+            }
         }
     }
 
 
     private void btn_dice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice1ActionPerformed
-        // TODO add your handling code here:
+        // Framedaki tüm zarlar için;
+        // Üzerine tıklandığında 
+        // Stun durumu toggle olur.
         toggleDice(btn_dice1);
 
 
     }//GEN-LAST:event_btn_dice1ActionPerformed
     public void rollthedices() {
+        // Tüm zarları gezer ve eğer zar
+        // Stun olanların olduğu arraylistte yoksa
+        // Zarı random numarayla atar.
+
         for (int i = 0; i < 6; i++) {
             if (!isDiceStun(rollableDices.get(i))) {
                 int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
@@ -1556,43 +1608,60 @@ public class Game extends javax.swing.JFrame {
 
     }
 
-    public void writeRivalPnt(String msg){
-        rivalRoundNum++;
-        String[] items=msg.split("-");
-        int index=Integer.valueOf(items[0]);
-        rivalPoints.get(index).setText(items[1]);
-        
-       
-        
-    }
-    public void endGameControl(int mR,int rR){
-        if(mR==2 && rR==2){
-            setMyTurn(false);
-            Client.Display("ben:"+mR+" - rival:"+rR+"\n Oyun Bitti:");
-            
-        }
-    }
-    
-    public void sendPntSelection(JButton btn){
+    public void sendPntSelection(JButton btn) {
+        // Client'ın attığı zarlar sonucu elde ettiği
+        // Puanlardan birini seçmesi ve bu bilgiyi karşıya da göndermesi.
+        // Bu mesaj "butonNo+Puan" şeklinde gidiyor.
+
         myRoundNum++;
-        String m=String.valueOf(getIndexofPointBtn(btn));
-        m+="-";
-        m+=btn.getText();        
+        String m = String.valueOf(getIndexofPointBtn(btn));
+        m += "-";
+        m += btn.getText();
         Message msg = new Message(Message.Message_Type.PNTSELECT);
         msg.content = m;
-        counter=0;
+        counter = 0;
         setMyTurn(false);
         Client.Send(msg);
-        
-        
-        
+
     }
-    
+
+    public void writeRivalPnt(String msg) {
+        // Client'a gelen mesaj durumunda çalışır
+        // Karşı tarafın listeden seçenek yapmasıyla
+        // Client, rival taraftaki listeye onun puanını yazar.
+        rivalRoundNum++;
+        String[] items = msg.split("-");
+        int index = Integer.valueOf(items[0]);
+        rivalPoints.get(index).setText(items[1]);
+
+    }
+
+    public int getIndexofPointBtn(JButton btn) {
+        // Bazı durumlarda butonun listede kaçıncı sırada olduğunu bulmak için
+        // yazdığım fonksiyon
+        int index = 0;
+        for (int i = 0; i < myPoints.size(); i++) {
+            if (myPoints.get(i).equals(btn)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+
     private void btn_rolldiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rolldiceActionPerformed
-        // TODO add your handling code here:
+        // Client'ın sırasıysa buton aktiftir.
+        // Oyuncunun 3 defa zar atma hakkı vardır, sonrasına buton disable olur
+
         counter++;
-        if(counter==3)btn_rolldice.setEnabled(false);
+        if (counter == 3) {
+            btn_rolldice.setEnabled(false);
+        }
         rollthedices();
+        // Yaptığım ufak matamatikle rolledDicesAsInt dizisindeki zarları
+        // Bir tam sayı şeklinde karşı tarafa int olarak mesaj atıyorum
+        // Örnegin 245662
 
         rolledDicesAsInt = 0;
         int y = 100000;
@@ -1603,54 +1672,46 @@ public class Game extends javax.swing.JFrame {
         showPointsonList();
         putDices();
 
-        //correctStunnedDiceLocForPlayer();
         Message msg = new Message(Message.Message_Type.ROLL);
         msg.content = rolledDicesAsInt;
         Client.Send(msg);
 
         // zar atma hakkı bittiyse durdur
-        
 
     }//GEN-LAST:event_btn_rolldiceActionPerformed
 
     private void btn_dice2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice2ActionPerformed
-        // TODO add your handling code here:
+
         toggleDice(btn_dice2);
     }//GEN-LAST:event_btn_dice2ActionPerformed
 
     private void btn_dice3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice3ActionPerformed
-        // TODO add your handling code here:
+
         toggleDice(btn_dice3);
     }//GEN-LAST:event_btn_dice3ActionPerformed
 
     private void btn_dice4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice4ActionPerformed
-        // TODO add your handling code here:
+
         toggleDice(btn_dice4);
     }//GEN-LAST:event_btn_dice4ActionPerformed
 
     private void btn_dice5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice5ActionPerformed
-        // TODO add your handling code here:
+
         toggleDice(btn_dice5);
     }//GEN-LAST:event_btn_dice5ActionPerformed
 
     private void btn_dice6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dice6ActionPerformed
-        // TODO add your handling code here:
+
         toggleDice(btn_dice6);
     }//GEN-LAST:event_btn_dice6ActionPerformed
 
-    public int getIndexofPointBtn(JButton btn) {
-        int index = 0;
-        for (int i = 0; i < myPoints.size(); i++) {
-            if (myPoints.get(i).equals(btn)) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
+
     private void btn_p1_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_4ActionPerformed
-        // TODO add your handling code here:
-         
+
+        // Client'ın kendi puanlarının olduğu listedeki her eleman için geçerli;
+        // Seçilen butondaki pouan myList'de gerekli indexe atanır.
+        // Ardından diğer seçilmeyen butonlar eski hale döner.
+        // Bu seçim karşı Client'a da gönderilir.
         myList[getIndexofPointBtn(btn_p1_4)] = String.valueOf(btn_p1_4.getText());
         btn_p1_4.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1658,7 +1719,7 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_p1_4ActionPerformed
 
     private void btn_p1_15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_15ActionPerformed
-        // TODO add your handling code here:
+
         myList[getIndexofPointBtn(btn_p1_15)] = String.valueOf(btn_p1_15.getText());
         btn_p1_15.setEnabled(false);
         puttBackUnSelectedPnts();
@@ -1666,96 +1727,91 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_p1_15ActionPerformed
 
     private void btn_p1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_1ActionPerformed
-        // TODO add your handling code here:
-       
+
         myList[getIndexofPointBtn(btn_p1_1)] = String.valueOf(btn_p1_1.getText());
         btn_p1_1.setEnabled(false);
         puttBackUnSelectedPnts();
-        
+
         sendPntSelection(btn_p1_1);
-        
+
     }//GEN-LAST:event_btn_p1_1ActionPerformed
 
     private void btn_p1_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_2ActionPerformed
-        // TODO add your handling code here:
-         
+
         myList[getIndexofPointBtn(btn_p1_2)] = String.valueOf(btn_p1_2.getText());
         btn_p1_2.setEnabled(false);
         puttBackUnSelectedPnts();
-        
+
         sendPntSelection(btn_p1_2);
     }//GEN-LAST:event_btn_p1_2ActionPerformed
 
     private void btn_p1_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_3ActionPerformed
-        // TODO add your handling code here:
-         
-          myList[getIndexofPointBtn(btn_p1_3)] = String.valueOf(btn_p1_3.getText());
+
+        myList[getIndexofPointBtn(btn_p1_3)] = String.valueOf(btn_p1_3.getText());
         btn_p1_3.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_3);
     }//GEN-LAST:event_btn_p1_3ActionPerformed
 
     private void btn_p1_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_5ActionPerformed
-        // TODO add your handling code here:
-        
-          myList[getIndexofPointBtn(btn_p1_5)] = String.valueOf(btn_p1_5.getText());
+
+        myList[getIndexofPointBtn(btn_p1_5)] = String.valueOf(btn_p1_5.getText());
         btn_p1_5.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_5);
     }//GEN-LAST:event_btn_p1_5ActionPerformed
 
     private void btn_p1_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_6ActionPerformed
-        // TODO add your handling code here:
-         
-          myList[getIndexofPointBtn(btn_p1_6)] = String.valueOf(btn_p1_6.getText());
+
+        myList[getIndexofPointBtn(btn_p1_6)] = String.valueOf(btn_p1_6.getText());
         btn_p1_6.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_6);
     }//GEN-LAST:event_btn_p1_6ActionPerformed
 
     private void btn_p1_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_9ActionPerformed
-        // TODO add your handling code here:
-          myList[getIndexofPointBtn(btn_p1_9)] = String.valueOf(btn_p1_9.getText());
+
+        myList[getIndexofPointBtn(btn_p1_9)] = String.valueOf(btn_p1_9.getText());
         btn_p1_9.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_9);
     }//GEN-LAST:event_btn_p1_9ActionPerformed
 
     private void btn_p1_10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_10ActionPerformed
-        // TODO add your handling code here:
-          myList[getIndexofPointBtn(btn_p1_10)] = String.valueOf(btn_p1_10.getText());
+
+        myList[getIndexofPointBtn(btn_p1_10)] = String.valueOf(btn_p1_10.getText());
         btn_p1_10.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_10);
     }//GEN-LAST:event_btn_p1_10ActionPerformed
 
     private void btn_p1_11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_11ActionPerformed
-        // TODO add your handling code here:
-          myList[getIndexofPointBtn(btn_p1_11)] = String.valueOf(btn_p1_11.getText());
+
+        myList[getIndexofPointBtn(btn_p1_11)] = String.valueOf(btn_p1_11.getText());
         btn_p1_11.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_11);
     }//GEN-LAST:event_btn_p1_11ActionPerformed
 
     private void btn_p1_12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_12ActionPerformed
-        // TODO add your handling code here:
-          myList[getIndexofPointBtn(btn_p1_12)] = String.valueOf(btn_p1_12.getText());
+
+        myList[getIndexofPointBtn(btn_p1_12)] = String.valueOf(btn_p1_12.getText());
         btn_p1_12.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_12);
     }//GEN-LAST:event_btn_p1_12ActionPerformed
 
     private void btn_p1_13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_13ActionPerformed
-        // TODO add your handling code here:
-          myList[getIndexofPointBtn(btn_p1_13)] = String.valueOf(btn_p1_13.getText());
+
+        myList[getIndexofPointBtn(btn_p1_13)] = String.valueOf(btn_p1_13.getText());
         btn_p1_13.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_13);
     }//GEN-LAST:event_btn_p1_13ActionPerformed
 
     private void btn_p1_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_p1_14ActionPerformed
-        // TODO add your handling code here:
-          myList[getIndexofPointBtn(btn_p1_14)] = String.valueOf(btn_p1_14.getText());
+
+        myList[getIndexofPointBtn(btn_p1_14)] = String.valueOf(btn_p1_14.getText());
         btn_p1_14.setEnabled(false);
         puttBackUnSelectedPnts();
         sendPntSelection(btn_p1_14);
