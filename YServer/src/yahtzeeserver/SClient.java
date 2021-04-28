@@ -14,11 +14,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-/**
- *
- * @author INSECT
- */
 public class SClient {
 
     int id;
@@ -50,7 +45,6 @@ public class SClient {
 
     }
 
-    //client mesaj gönderme
     public void Send(Message message) {
         try {
             this.sOutput.writeObject(message);
@@ -117,7 +111,6 @@ public class SClient {
         }
     }
 
-    //eşleştirme threadi
     //her clientin ayrı bir eşleştirme thredi var
     class PairingThread extends Thread {
 
@@ -128,7 +121,7 @@ public class SClient {
         }
 
         public void run() {
-            //client bağlı ve eşleşmemiş olduğu durumda dön
+            //client bağlı ve eşleşmemiş olduğu durum
             while (TheClient.soket.isConnected() && TheClient.paired == false) {
                 try {
                     //lock mekanizması
@@ -136,7 +129,7 @@ public class SClient {
                     //diğerleri release olana kadar bekler
                     Server.pairTwo.acquire(1);
 
-                    //client eğer eşleşmemişse gir
+                    //client eğer eşleşmemişse 
                     if (!TheClient.paired) {
                         SClient crival = null;
                         //eşleşme sağlanana kadar dön
@@ -160,7 +153,7 @@ public class SClient {
                         }
                         //eşleşme oldu
                         //her iki tarafada eşleşme mesajı gönder 
-                        //oyunu başlat
+
                         Message msg1 = new Message(Message.Message_Type.RivalConnected);
                         msg1.content = TheClient.name;
                         Server.Send(TheClient.rival, msg1);

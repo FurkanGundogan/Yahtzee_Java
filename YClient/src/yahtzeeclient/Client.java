@@ -16,10 +16,6 @@ import static yahtzeeclient.Client.sInput;
 import game.Game;
 import javax.swing.JButton;
 
-/**
- *
- * @author INSECT
- */
 // serverdan gelecek mesajları dinleyen thread
 class Listen extends Thread {
 
@@ -31,7 +27,6 @@ class Listen extends Thread {
                 //mesaj gelmesini bloking olarak dinyelen komut
                 Message received = (Message) (sInput.readObject());
                 //mesaj gelirse bu satıra geçer
-                //mesaj tipine göre yapılacak işlemi ayır.
                 switch (received.type) {
                     case Name:
                         break;
@@ -87,22 +82,20 @@ public class Client {
     //her clientın bir soketi olmalı
     public static Socket socket;
 
-    //verileri almak için gerekli nesne
     public static ObjectInputStream sInput;
-    //verileri göndermek için gerekli nesne
+
     public static ObjectOutputStream sOutput;
-    //serverı dinleme thredi 
+    //serveri dinleme threadi 
     public static Listen listenMe;
 
     public static void Start(String ip, int port) {
         try {
-            // Client Soket nesnesi
+            // Soket nesnesi
             Client.socket = new Socket(ip, port);
             Client.Display("Servera bağlandı");
 
-            // input stream
             Client.sInput = new ObjectInputStream(Client.socket.getInputStream());
-            // output stream
+
             Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
             Client.listenMe = new Listen();
             Client.listenMe.start();
@@ -116,7 +109,6 @@ public class Client {
         }
     }
 
-    //client durdurma fonksiyonu
     public static void Stop() {
         try {
             if (Client.socket != null) {
@@ -139,7 +131,6 @@ public class Client {
 
     }
 
-    //mesaj gönderme fonksiyonu
     public static void Send(Message msg) {
         try {
             Client.sOutput.writeObject(msg);

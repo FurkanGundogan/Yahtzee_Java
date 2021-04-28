@@ -15,10 +15,7 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author INSECT
- */
+
 //client gelişini dinleme threadi
 class ServerThread extends Thread {
 
@@ -86,7 +83,6 @@ public class Server {
     }
 
     // serverdan clietlara mesaj gönderme
-    //clieti alıyor ve mesaj yolluyor
     public static void Send(SClient cl, Message msg) {
 
         try {

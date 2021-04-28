@@ -21,10 +21,6 @@ import javax.swing.JButton;
 import static game.Message.Message_Type.Disconnect;
 import java.awt.Color;
 
-/**
- *
- * @author INSECT
- */
 public class Game extends javax.swing.JFrame {
 
     //statik oyun değişkeni
@@ -32,7 +28,7 @@ public class Game extends javax.swing.JFrame {
 
     public Thread tmr_slider;
 
-    // Oyun durumu: bitiş durumu için kontrol ediliyor.
+    // Oyun durumu: bitis durumu icin kontrol ediliyor.
     public int gameState = -1;
 
     // Birinci ve ikinci oyuncu için farklı değerler alır. 1 olan başlar.
@@ -270,8 +266,21 @@ public class Game extends javax.swing.JFrame {
         return state;
     }
 
+    public int findDice(JButton btn) {
+        // Tüm zarlar arasından bir zarı getirmek için ayarladığım fonksiyon.
+        int index = 0;
+        for (JButton r : rollableDices) {
+            if (r.equals(btn)) {
+                break;
+            }
+            index++;
+        }
+        return index;
+    }
+
     public void stunEffect(JButton dice, boolean state) {
         int i = findDice(dice);
+        // Zar stun ediliyorsa mavi renkli verisyonu getirilecek.
 
         if (state) {
             switch (rolledDices[i]) {
@@ -294,7 +303,7 @@ public class Game extends javax.swing.JFrame {
                     rollableDices.get(i).setIcon(new ImageIcon("src//images//stunneddices//s6.png"));
                     break;
             }
-        } else {
+        } else { // Zar unstun ediliyorsa eski halinde dönecek.
             switch (rolledDices[i]) {
                 case 1:
                     rollableDices.get(i).setIcon(new ImageIcon("src//images//dices//1.png"));
@@ -317,18 +326,6 @@ public class Game extends javax.swing.JFrame {
             }
         }
 
-    }
-
-    public int findDice(JButton btn) {
-        // Tüm zarlar arasından bir zarı getirmek için ayarladığım fonksiyon.
-        int index = 0;
-        for (JButton r : rollableDices) {
-            if (r.equals(btn)) {
-                break;
-            }
-            index++;
-        }
-        return index;
     }
 
     public void toggleRivalDice(String msg) {

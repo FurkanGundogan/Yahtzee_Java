@@ -5,10 +5,6 @@
  */
 package game;
 
-/**
- *
- * @author INSECT
- */
 public class Message implements java.io.Serializable {
 
     public static enum Message_Type {
